@@ -1,16 +1,16 @@
 <template>
   <div>
      <v-header></v-header>
-  </div>
-  <router-view :home="home" keep-alive></router-view>
+     <router-view :home="home" keep-alive></router-view>
+  </div>  
 </template>
 
 <script type="text/ecmascript-6">
 import header from './components/header/header';
   export default {
-  components:{
-     'v-header':header
-  }
+    components:{
+       'v-header':header
+    }
   }
 </script>
 

@@ -30,7 +30,7 @@
 	         this.showFlag=!this.showFlag;
 	        /* window.alert(window.innerWidth-this.$els.menuWrapper.offsetLeft) */
 	         if (window.innerWidth-this.$els.menuWrapper.offsetLeft===28) {
-	            this.$els.menuWrapper.style.right=90+'px';
+	            this.$els.menuWrapper.style.right='37%';
 	         } else {
 	            this.$els.menuWrapper.style.right=12+'px';
 	         }
@@ -99,12 +99,12 @@
 			 	  	transform:translate3d(0,0,0);
 			 	}
 		 	    &.move-enter, &.move-leave{
-			 	  	transform:translate3d(90px,0,0);
+			 	  	transform:translate3d(37%,0,0);
 			 	}
        	    }	    
        }
        .navbar-wrapper{
-       	  width: 85px;
+       	  width: 35%;
 	 	  height: 100%;
 	 	  position: fixed;
 	 	  top: 0;
@@ -117,7 +117,7 @@
 	 	  	transform:translate3d(0,0,0);
 	 	  }
 	 	  &.move-enter, &.move-leave{
-	 	  	transform:translate3d(85px,0,0);
+	 	  	transform:translate3d(35%,0,0);
 	 	  }
        }
 	}
