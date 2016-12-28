@@ -24,35 +24,11 @@
 		<div class="recommendbook-wrapper" v-el:recmdb-wrapper>
 		   <v-title msg="推荐小书"></v-title>
 		   <ul class="book_list" v-el:book-list>
-		   	   <li class="book_item">
+		   	   <li class="book_item" v-for="book in books">
 			   	  <a href="/">
-			   	  	<img src="http://aissues.com/images/book_fm/fc3251ed-bb17-41d9-99d8-521c3d544534.png" width="90"  height="120">
+			   	  	<img :src='book.bookimg' width="90"  height="120">
 			   	  	<p class="book_item_title name_ell">
-					      Hubot+Slack入门
-					</p>
-			   	  </a> 
-			   </li>
-			   <li class="book_item">
-			   	  <a href="/">
-			   	  	<img src="http://aissues.com/images/book_fm/b1764364-3c43-419e-9dce-a130445b3bda.png" width="90"  height="120">
-			   	  	<p class="book_item_title name_ell">
-					      RxJava入门
-					</p>
-			   	  </a> 
-			   </li>
-			   <li class="book_item">
-			   	  <a href="/">
-			   	  	<img src="http://aissues.com/images/book_fm/01c1a39d-2aeb-4d13-9a90-a2b9273bc496.png" width="90"  height="120">
-			   	  	<p class="book_item_title name_ell">
-					       一周快速开发上线App
-					</p>
-			   	  </a> 
-			   </li>
-			   <li class="book_item">
-			   	  <a href="/">
-			   	  	<img src="http://aissues.com/images/book_fm/fc3251ed-bb17-41d9-99d8-521c3d544534.png" width="90"  height="120">
-			   	  	<p class="book_item_title name_ell">
-					      Hubot+Slack入门
+					      {{book.bookname}}
 					</p>
 			   	  </a> 
 			   </li>
@@ -64,6 +40,7 @@
 <script type="text/ecmascript-6">
     import title from 'components/title/title.vue';
     import BScroll from 'better-scroll';
+    const PUBLIC_URL='http://aissues.com';
 	export default {
 	  data() {
 	      return {}
@@ -77,7 +54,10 @@
 	         },
 	         bookid:{
 	           type:Array
-	         } 
+	         },
+	         books:{
+	           type:Array
+	         }
 	   },
 	   created() {
 	      this.$http.get('http://aissues.com/api/public/banner.php?num=1').then((response) => {
@@ -95,17 +75,27 @@
 	      this.$http.get('http://aissues.com/base/api/index_set/get.php').then((response) => {
                   response=response.body;
 	              if (response.status===1) {
-	                  console.log(response.info);
+	                  // console.log(response.info);
 	                  var recmdataId=response.data;
 	                  this.bookid=recmdataId;
-	                  console.log(this.bookid)
+	                  // console.log(this.bookid)
 	                 }
 		      }).then(function() {
-		      console.log(this.bookid)
-		      this.$http.post('http://aissues.com/api/public/get_book_id.php',{bookids:this.bookid},{headers:headers}).then((response) => {
+		      // console.log(this.bookid)
+		      this.$http.post('http://aissues.com/api/public/get_book_id.php',{bookids:this.bookid},{headers:headers,emulateJSON:true}).then((response) => {
 	              response=response.body;
 	              if (response.status===1) {
-	                 console.log(response.info)
+	                 console.log(response.info);
+	                 // console.log(response.data[0].bookimg);
+	                 this.books=response.data;
+	                 console.log(this.books)
+	                 let bookimgs=[];
+	                 for (let i=0;i<response.data.length;i++) {
+	                    bookimgs.push(PUBLIC_URL+response.data[i].bookimg); 
+	                 }
+	                 this.books.bookimgs=bookimgs;
+	                 console.log(this.books.bookimgs);
+
 	              } else {
 	                 console.log(response.info)
 	              }
