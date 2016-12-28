@@ -89,26 +89,27 @@
                 this.imglink=data[0].link;
              }
 	      });
-	      this.$http.get('http://aissues.com/base/api/index_set/get.php').then((response) => {
-              response=response.body;
-              if (response.status===1) {
-                  console.log(response.info);
-                  var recmdataId=response.data;
-                  this.bookid=recmdataId;
-                  console.log(this.bookid)
-              }
-	      });
-          var headers={
+	       var headers={
              'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
           }; 
-	      this.$http.post('http://aissues.com/api/public/get_book_id.php',{bookids:this.bookid},{headers:headers}).then((response) => {
-              response=response.body;
-              if (response.status===1) {
-                 console.log(response.info)
-              } else {
-                 console.log(response.info)
-              }
-	      })
+	      this.$http.get('http://aissues.com/base/api/index_set/get.php').then((response) => {
+                  response=response.body;
+	              if (response.status===1) {
+	                  console.log(response.info);
+	                  var recmdataId=response.data;
+	                  this.bookid=recmdataId;
+	                  console.log(this.bookid)
+	                 }
+		      }).then(function() {
+		      console.log(this.bookid)
+		      this.$http.post('http://aissues.com/api/public/get_book_id.php',{bookids:this.bookid},{headers:headers}).then((response) => {
+	              response=response.body;
+	              if (response.status===1) {
+	                 console.log(response.info)
+	              } else {
+	                 console.log(response.info)
+	              }
+		      }) })             
 	   },
 	   watch: {
 	      'home'() {
