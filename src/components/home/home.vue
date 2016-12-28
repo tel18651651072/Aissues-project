@@ -26,7 +26,8 @@
 		   <ul class="book_list" v-el:book-list>
 		   	   <li class="book_item" v-for="book in books">
 			   	  <a href="/">
-			   	  	<img :src='book.bookimg' width="90"  height="120">
+			   	  	<img :src="book.bookimg"
+ width="90"  height="120">
 			   	  	<p class="book_item_title name_ell">
 					      {{book.bookname}}
 					</p>
@@ -64,8 +65,7 @@
              response=response.body;
              if (response.status===1) {
                 var data=response.data;
-                var httpurl = 'http://aissues.com' 
-                this.imgurl=httpurl+data[0].imgurl;
+                this.imgurl=PUBLIC_URL+data[0].imgurl;
                 this.imglink=data[0].link;
              }
 	      });
@@ -81,20 +81,15 @@
 	                  // console.log(this.bookid)
 	                 }
 		      }).then(function() {
-		      // console.log(this.bookid)
 		      this.$http.post('http://aissues.com/api/public/get_book_id.php',{bookids:this.bookid},{headers:headers,emulateJSON:true}).then((response) => {
 	              response=response.body;
 	              if (response.status===1) {
 	                 console.log(response.info);
-	                 // console.log(response.data[0].bookimg);
 	                 this.books=response.data;
-	                 console.log(this.books)
-	                 let bookimgs=[];
 	                 for (let i=0;i<response.data.length;i++) {
-	                    bookimgs.push(PUBLIC_URL+response.data[i].bookimg); 
+	                    response.data[i].bookimg=PUBLIC_URL+response.data[i].bookimg;
+	                    this.books.bookimg=response.data[i].bookimg
 	                 }
-	                 this.books.bookimgs=bookimgs;
-	                 console.log(this.books.bookimgs);
 
 	              } else {
 	                 console.log(response.info)
