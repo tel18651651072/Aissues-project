@@ -45,8 +45,12 @@
 <style lang="stylus" rel="stylesheet/stylus">
 	@import '../../common/stylus/mixin.styl';
 	.header{
-       overflow: hidden;
        background: #fff;
+       position: fixed;
+       width: 100%;
+       z-index: 60;
+       top: 0;
+       left: 0;
        .content-wrapper{
        	  padding: 12px;
        	  position: relative;

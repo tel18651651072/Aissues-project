@@ -1,39 +1,40 @@
 <template>
 	<div class="home" v-el:home>
-		<div class="banner-wrapper">
-			<div class="banner-item">
-				<a v-link="imglink">
-					<img :src="imgurl">
-				</a>
+	    <div class="home-content">	
+			<div class="banner-wrapper">
+				<div class="banner-item">
+					<a v-link="imglink">
+						<img :src="imgurl">
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="ads-wrapper">
-			<div class="ads-item">
-				<a href="/">
-					<img src="http://aissues.com/images/site/page_1.png">
-					<span>除iPhone耳机孔苹果还想“干掉”这些东西</span>
-				</a>
+			<div class="ads-wrapper">
+				<div class="ads-item">
+					<a href="/">
+						<img src="http://aissues.com/images/site/page_1.png">
+						<span>除iPhone耳机孔苹果还想“干掉”这些东西</span>
+					</a>
+				</div>
+				<div class="ads-item">
+					<a href="/">
+						<img src="http://aissues.com/images/site/page_2.png">
+						<span>傅盛：最重要的事，只有一件</span>
+					</a>
+				</div>
 			</div>
-			<div class="ads-item">
-				<a href="/">
-					<img src="http://aissues.com/images/site/page_2.png">
-					<span>傅盛：最重要的事，只有一件</span>
-				</a>
+			<div class="recommendbook-wrapper">
+			   <v-title msg="推荐小书"></v-title>
+			   <ul class="book_list clearfix">
+			   	   <li class="book_item" v-for="book in books">
+				   	  <a href="/">
+				   	  	<img :src="book.bookimg">
+				   	  	<p class="book_item_title name_ell">
+						      {{book.bookname}}
+						</p>
+				   	  </a> 
+				   </li>
+			   </ul>   
 			</div>
-		</div>
-		<div class="recommendbook-wrapper">
-		   <v-title msg="推荐小书"></v-title>
-		   <ul class="book_list clearfix">
-		   	   <li class="book_item" v-for="book in books">
-			   	  <a href="/">
-			   	  	<img :src="book.bookimg">
-			   	  	<p class="book_item_title name_ell">
-					      {{book.bookname}}
-					</p>
-			   	  </a> 
-			   </li>
-		   </ul>
-		   
 		</div>
 	</div>
 </template>
@@ -94,7 +95,7 @@
 	              } else {
 	                 console.log(response.info)
 	              }
-		      }) })             
+		      }) })
 	   },
 	   watch: {
 	      'home'() {
@@ -103,13 +104,14 @@
 	   },
 	   ready() {
 	      this._initScroll();
-	   },
+	   }, 
 	   methods: {
 	      _initScroll() {
 	         this.$nextTick(() => {
 	            if (!this.scroll) {
 	               this.scroll = new BScroll(this.$els.home,{
-	                   click:true
+	                   click:true,
+	                   probeType:3
 	               });
 	            } else {
 	               this.scroll.refresh();
