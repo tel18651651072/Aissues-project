@@ -40,7 +40,7 @@
 </template>
 <script type="text/ecmascript-6">
     import title from 'components/title/title.vue';
-    import BScroll from 'better-scroll';
+    // import BScroll from 'better-scroll';
     const PUBLIC_URL='http://aissues.com';
 	export default {
 	  data() {
@@ -97,16 +97,16 @@
 	              }
 		      }) })
 	   },
-	   watch: {
+	   /* watch: {
 	      'home'() {
 	          this._initScroll();
 	      }
-	   },
+	   }, 
 	   ready() {
 	      this._initScroll();
-	   }, 
+	   }, */
 	   methods: {
-	      _initScroll() {
+	    /*  _initScroll() {
 	         this.$nextTick(() => {
 	            if (!this.scroll) {
 	               this.scroll = new BScroll(this.$els.home,{
@@ -117,7 +117,7 @@
 	               this.scroll.refresh();
 	            }
 	         })
-	      }
+	      } */
 	   },
 	   components:{
 	      'v-title':title
@@ -126,12 +126,13 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 	.home{
-		position: absolute;
-		left: 0;
-		top: 48px;
-		bottom: 0;
-		width: 100%;
-		overflow:hidden;
+		// position: absolute;
+		// left: 0;
+		// top: 48px;
+		// bottom: 0;
+		// width: 100%;
+		// overflow:hidden;
+		margin-top: 48px;
 		.banner-wrapper{
 			.banner-item{
 				width: 100%;
