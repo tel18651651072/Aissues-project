@@ -35,6 +35,20 @@
 				   </li>
 			   </ul>   
 			</div>
+			<div class="newbooks-wrapper">
+				<v-title msg="最新小书"></v-title>
+				<ul class="newbooks-list">
+					<li class="newbook-item" v-for="item in newbooks">
+						<a href="/">
+							<p class="newbook-title name_ell">{{item.bookname}}</p>
+							<p class="newbook-time name_ell">{{item.time}}</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="news-classify-wrapper">
+				<v-title msg="分类新闻"></v-title>
+			</div>
 		</div>
 	</div>
 </template>
@@ -57,6 +71,9 @@
 	           type:Array
 	         },
 	         books:{
+	           type:Array
+	         },
+	         newbooks:{
 	           type:Array
 	         }
 	   },
@@ -95,7 +112,13 @@
 	              } else {
 	                 console.log(response.info)
 	              }
-		      }) })
+		      }) });
+		      this.$http.get('http://aissues.com/api/public/get_new_books.php').then((response) => {
+                  response=response.body;
+                  if (response.status===1) {
+                     this.newbooks=response.data;
+                  }
+		      })
 	   },
 	   /* watch: {
 	      'home'() {
@@ -214,6 +237,42 @@
 				}
 			}
 			
+		}
+		.newbooks-wrapper{
+			width: 100%;
+			overflow: hidden;
+			margin-top: 5px;
+			border-top: 1px solid #e9e9e9;
+			border-bottom: 1px solid #e9e9e9;
+			box-shadow: 2px 2px 2px #ddd;
+			.newbooks-list{
+				.newbook-item{
+					a{
+						padding:3px 10px;
+						display: flex;
+						color: #5F5F5F;
+						line-height: 20px;
+						font-size: 12px;
+						border-bottom: 1px dashed #F2F2F2;
+						.newbook-title{
+							flex:0 0 180px;
+							width:180px;	
+						}
+						.newbook-time{
+							flex:1;	
+							text-align: right;					
+						}
+					}
+				}
+			}
+		}
+		.news-classify-wrapper{
+			width: 100%;
+			overflow: hidden;
+			margin-top: 5px;
+			border-top: 1px solid #e9e9e9;
+			border-bottom: 1px solid #e9e9e9;
+			box-shadow: 2px 2px 2px #ddd;
 		}
 	}
 </style>
