@@ -21,13 +21,12 @@
 				</a>
 			</div>
 		</div>
-		<div class="recommendbook-wrapper" v-el:recmdb-wrapper>
+		<div class="recommendbook-wrapper">
 		   <v-title msg="推荐小书"></v-title>
-		   <ul class="book_list" v-el:book-list>
+		   <ul class="book_list clearfix">
 		   	   <li class="book_item" v-for="book in books">
 			   	  <a href="/">
-			   	  	<img :src="book.bookimg"
- width="90"  height="120">
+			   	  	<img :src="book.bookimg">
 			   	  	<p class="book_item_title name_ell">
 					      {{book.bookname}}
 					</p>
@@ -86,6 +85,7 @@
 	              if (response.status===1) {
 	                 console.log(response.info);
 	                 this.books=response.data;
+	                 this.books.length=8;
 	                 for (let i=0;i<response.data.length;i++) {
 	                    response.data[i].bookimg=PUBLIC_URL+response.data[i].bookimg;
 	                    this.books.bookimg=response.data[i].bookimg
@@ -178,22 +178,39 @@
 			border-top: 1px solid #E9E9E9;
 			border-bottom: 1px solid #E9E9E9;
 			box-shadow: 2px 2px 2px #ddd;
-			.book_item{
-				display: inline-block;
-				overflow:hidden;
-				a{
+			.book_list{
+				padding:1%;
+				.book_item{
 					display: inline-block;
-					img{
-						box-shadow: 2px 2px 2px #ddd;
+					overflow:hidden;
+					width: 23.5%;
+					margin-right:1%;
+					&:nth-child(4n+1){
+						margin-left:1.5%;
 					}
-					.book_item_title{
-                        text-align: center;
-						line-height: 25px;
-						color: #373737;
-						font-size: 12px;
+					a{
+						display: inline-block;
+						width: 100%;
+						img{
+							width: 100%;
+							box-shadow: 2px 2px 2px #ddd;
+							overflow: hidden;
+							&:after{
+								content:'';
+								display: block;
+								padding-top:133%;
+							}
+						}
+						.book_item_title{
+	                        text-align: center;
+							line-height: 25px;
+							color: #373737;
+							font-size: 12px;
+						}
 					}
 				}
 			}
+			
 		}
 	}
 </style>
